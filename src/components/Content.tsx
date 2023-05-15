@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import Header from "./Header"
 import { createGlobalStyle } from 'styled-components'
-import arrow from '../images/Vector 2.png'
-import { useNavigate } from "react-router"
+// import arrow from '../images/Vector 2.png'
+import { useLocation } from "react-router-dom"
 
 const GlobalStyle=createGlobalStyle`
 body{
@@ -45,21 +45,25 @@ const ImgArrow=styled.img`
     position:absolute;
     left:50%;
 `
+const ImgArrowleft=styled.img`
+    position:absolute;
+    left:45%;
+    top:110vh;
+`
 
-export default function Content(props:any){
-    const nav=useNavigate()
-    function HandleClick(){
-        return nav(+1)
-    }
+
+export default function Content(props:any){   
+    const location=useLocation();      
     return(
         <>
           <GlobalStyle/>
-          <Header/>
+          <Header page={location.pathname==='/private'?'1/4':location.pathname==='/covidstatus'?'2/4':location.pathname==='/vaccination'?'3/4':location.pathname==='covidpolice'?'4/4':null}/>
           <Wraper>
              {props.inputs}
               <Image src={props.picture}></Image>
           </Wraper> 
-          <ImgArrow onClick={HandleClick} src={arrow}></ImgArrow>
+          <ImgArrowleft onClick={props.click} src={props.leftarrow}></ImgArrowleft>
+          <ImgArrow onClick={props.handleClick} src={props.arrow}></ImgArrow>
         </>
     )
 }
