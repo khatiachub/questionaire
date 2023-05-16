@@ -1,5 +1,5 @@
 import { Reset } from "styled-reset"
-import Questionary from "./components/Questionary"
+import Questionary from "./components/Questionaire"
 import { HashRouter,Routes,Route } from "react-router-dom"
 import Private from "./components/Private"
 import CovidStatus from "./components/CovidStatus"

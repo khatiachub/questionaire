@@ -41,15 +41,6 @@ object-fit:cover;
 }
     
 `
-const ImgArrow=styled.img`
-    position:absolute;
-    left:50%;
-`
-const ImgArrowleft=styled.img`
-    position:absolute;
-    left:45%;
-    top:110vh;
-`
 
 
 export default function Content(props:any){   
@@ -62,8 +53,8 @@ export default function Content(props:any){
              {props.inputs}
               <Image src={props.picture}></Image>
           </Wraper> 
-          <ImgArrowleft onClick={props.click} src={props.leftarrow}></ImgArrowleft>
-          <ImgArrow onClick={props.handleClick} src={props.arrow}></ImgArrow>
+          {/* <ImgArrowleft onClick={props.click} src={props.leftarrow}></ImgArrowleft> */}
+          {/* <ImgArrow onClick={props.handleClick} src={props.arrow}></ImgArrow> */}
         </>
     )
 }
