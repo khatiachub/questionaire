@@ -1,6 +1,4 @@
-// import { useForm,Controller } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
-// import { useState } from 'react';
 import Leftarrow from '../images/Vector 7.png';
 import arrow from '../images/Vector 2.png';
 import picture from '../images/doctor2.png';
