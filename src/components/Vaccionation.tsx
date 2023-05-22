@@ -10,6 +10,15 @@ import { useState } from 'react';
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  width:50%;
+  @media (max-width: 768px) {
+   position: absolute;
+   z-index: 1;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 84%;
+
+ }
 `;
 const Input = styled.input`
   font-size: 20px;
@@ -27,22 +36,36 @@ const Legend = styled.legend`
     font-size: 20px;
   }
 `;
-const Label = styled.label``;
-const ImgArrow = styled.img`
-  position: absolute;
-  left: 53%;
-  top: 120vh;
-  bottom: 40px;
+const Label = styled.label`
+     font-size:16px;
+     width:534px;
+
 `;
+const ImgArrow = styled.img`
+  /* position: absolute; */
+  /* left: 53%; */
+  /* top: 120vh; */
+  /* bottom: 40px; */
+`
 const ImgArrowleft = styled.img`
-  position: absolute;
-  left: 45%;
-  top: 120vh;
+  /* position: absolute; */
+  /* left: 45%; */
+  /* top: 120vh; */
 `;
 const Button = styled.button`
   background-color: #e5e7e9;
   border: none;
+  position: absolute;
+  left: 50%;
+  top: 120vh;
 `;
+const ButtonLeft=styled.button`
+   background-color: #e5e7e9;
+   border: none;
+   position: absolute;
+   left: 45%;
+   top: 120vh;
+`
 const ErrorMessage = styled.p`
   color: #f15524;
   font-size: 16px;
@@ -54,7 +77,7 @@ const Paragraph = styled.p`
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
-  width: 337px;
+  width: 300px;
   margin-top: 39px;
   margin-left: 20px;
 `;
@@ -79,9 +102,10 @@ export default function Vaccination() {
     nav(-1);
   };
 
-  const response = register('response', { required: true });
-  const registered = register('registered', { required: true });
+
   const [state, setState] = useState<string>();
+  const response = register('response', { required: true });
+  const registered = register('registered', { required: state==='agree'?true:false});
   const handleChange = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
     setState(target.value);
@@ -92,7 +116,7 @@ export default function Vaccination() {
     setValue(target.value);
   };
   const [vaccine, setVaccine] = useState<string>('');
-  const vaccination = register('vaccination', { required: true });
+  const vaccination = register('vaccination', { required:state==='deny'?true:false });
   const handleChange3 = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
     setVaccine(target.value);
@@ -277,11 +301,11 @@ export default function Vaccination() {
             )}
 
             <div style={{ display: 'flex' }}>
-              <Button onClick={onLeftArrowClick}>
-                <ImgArrowleft src={Leftarrow}></ImgArrowleft>
-              </Button>
+              <ButtonLeft>
+                <ImgArrowleft onClick={onLeftArrowClick} src={Leftarrow}></ImgArrowleft>
+              </ButtonLeft>
               <Button type='submit'>
-                <ImgArrow src={arrow}></ImgArrow>
+                <ImgArrow style={{opacity:state&&value||(state&&vaccine)?'100%':'50%'}}   src={arrow}></ImgArrow>
               </Button>
             </div>
           </Form>

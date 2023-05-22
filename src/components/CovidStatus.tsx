@@ -68,8 +68,6 @@ const ImgArrowleft=styled.img`
   top:120vh;
 `
 
-
-
 const Button = styled.button`
   background-color: #e5e7e9;
   border: none;
