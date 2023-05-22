@@ -1,4 +1,4 @@
-import styled,{keyframes} from "styled-components"
+import styled from "styled-components"
 import {Link} from 'react-router-dom'
 import picture from '../images/Vector (11).png'
 
@@ -8,31 +8,15 @@ const MainWraper=styled.div`
  height:100vh;
  position: relative;
 `
-const zoomOut = keyframes`
-  0% {
-    width:100%;
-    height: 100%;
-    top:0;
-    left:0;
-  }
-  100% {
-    width:100px;
-    height: 100px;
-    top:50%;
-    left:50%;
-    transform:translate(-50%);
-    border-radius:50%;
-  }
-`;
 const Image=styled.img`
       position:absolute;
-      /* top:50%; */
-      /* left:50%; */
-      /* transform:translate(-50%); */
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
       object-fit:cover;
-      animation: ${zoomOut} 0.3s ease-in-out forwards;
-      transform-origin: center;
-      transform: width 50px ;
+      width:150px;
+      height:150px;
+      border-radius:50%;
  `
  const Title=styled(Link)`
  font-size:30px;
@@ -47,6 +31,8 @@ const Image=styled.img`
  position:absolute;
  top:50%; 
  left:50%;
+ transform:translate(-50%);
+
  width:200px;
  height:300px;
  display:flex;
