@@ -17,14 +17,13 @@ const Form = styled.form`
    left: 50%;
    transform: translateX(-50%);
    width: 84%;
-
  }
 `;
 const Input = styled.input`
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
-  margin-top: 19px;
+  margin-top: 22px;
 `;
 const Legend = styled.legend`
   margin-top: 46px;
@@ -38,31 +37,32 @@ const Legend = styled.legend`
 `;
 const Label = styled.label`
      font-size:16px;
-     width:534px;
+     max-width:534px;
+     width:100%;
 
 `;
 const ImgArrowleft = styled.img`
-  
 `;
 const ArrowWraper=styled.div`
   display:flex;
-  margin-left:50%;
+  left:50%;
   transform:translateX(-50%);
-  justify-content:space-around;
-  margin-bottom:50px;
-  margin-top:50px;
+  justify-content:space-between;
+  position: absolute;
+  top: 90vh;
+  @media screen and (max-width:768px) {
+    top:77vh;
+  }
+  width:270px;
 `
 const Button = styled.button`
   background-color: #208298;
   border: none;
-  position: absolute;
   width:180px;
   height:56px;
   border-radius:42px;
-  left: 40%;
-  top: 100vh;
   color:#fff;
-   cursor: pointer;
+  cursor: pointer;
 `;
 const ButtonLeft=styled.button`
    background-color: #e5e7e9;
@@ -79,9 +79,13 @@ const Paragraph = styled.p`
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
-  width: 300px;
+  max-width: 300px;
+  width:100%;
   margin-top: 39px;
   margin-left: 20px;
+  @media screen and (max-width:768px) {
+    font-size: 17px;
+  }
 `;
 const Atag = styled.a`
   margin-top: 10px;
@@ -196,7 +200,7 @@ export default function Vaccination() {
         inputs={
           <Form onSubmit={handleSubmit(HandleClick)}>
             <Legend>უკვე აცრილი ხარ?*</Legend>
-            <div>
+            <div style={{display:'flex',alignItems:'baseline'}}>
               <Input
                 checked={state === 'agree'}
                 type='radio'
@@ -209,7 +213,7 @@ export default function Vaccination() {
               ></Input>
               <Label>კი</Label>
             </div>
-            <div>
+            <div style={{display:'flex',alignItems:'baseline'}}>
               <Input
                 checked={state === 'deny'}
                 type='radio'
@@ -231,7 +235,7 @@ export default function Vaccination() {
             {state === 'agree' ? (
               <>
                 <Legend>აირჩიე რა ეტაპზე ხარ*</Legend>
-                <div>
+                <div style={{display:'flex',alignItems:'baseline'}}>
                   <Input
                     checked={value === 'registered'}
                     type='radio'
@@ -244,7 +248,7 @@ export default function Vaccination() {
                   ></Input>
                   <Label>პირველი დოზა და დარეგისტრირებული ვარ მეორეზე</Label>
                 </div>
-                <div>
+                <div style={{display:'flex',alignItems:'baseline'}}>
                   <Input
                     checked={value === 'vaccinated'}
                     type='radio'
@@ -257,7 +261,7 @@ export default function Vaccination() {
                   ></Input>
                   <Label>სრულად აცრილი ვარ</Label>
                 </div>
-                <div>
+                <div style={{display:'flex',alignItems:'baseline'}}>
                   <Input
                     checked={value === 'notregistered'}
                     type='radio'
@@ -292,7 +296,7 @@ export default function Vaccination() {
             {state === 'deny' ? (
               <>
                 <Legend>რას ელოდები?*</Legend>
-                <div>
+                <div style={{display:'flex',alignItems:'baseline'}}>
                   <Input
                     type='radio'
                     value='waitinglist'
@@ -305,7 +309,7 @@ export default function Vaccination() {
                   <Label>დარეგისტრირებული ვარ და ველოდები რიცხვს</Label>
                 </div>
 
-                <div>
+                <div style={{display:'flex',alignItems:'baseline'}}>
                   <Input
                     type='radio'
                     value='notplanning'
@@ -318,7 +322,7 @@ export default function Vaccination() {
                   <Label>არ ვგეგმავ</Label>
                 </div>
 
-                <div>
+                <div style={{display:'flex',alignItems:'baseline'}}>
                   <Input
                     type='radio'
                     value='planning'

@@ -57,14 +57,10 @@ const Radio = styled.label`
   font-weight: 400;
 `;
 const ImgArrow = styled.img`
-   /* position:absolute;
-   left: 53%;
-   bottom:50px; */
+   
 `;
 const ImgArrowleft=styled.img`
-  /* position: absolute;
-  left: 45%;
-  bottom:50px; */
+ 
 `
 const Wraper=styled.div`
   width:100%;
@@ -81,9 +77,6 @@ const ArrowWraper=styled.div`
   width:150px;
   z-index:100 ;
   top:90vh;
-  @media screen and (max-width:768px) {
-    top:80vh;
-  }
 `
 const Button = styled.button`
   background-color: #e5e7e9;
@@ -341,7 +334,7 @@ export default function CovidStatus() {
             ) : (
               ''
             )}
-            <ArrowWraper >
+            <ArrowWraper>
             <Button onClick={onLeftArrowClick}>
               <ImgArrowleft src={Leftarrow}>
             </ImgArrowleft>
