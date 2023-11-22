@@ -10,7 +10,7 @@ const MainWraper=styled.div`
 `
 const Image=styled.img`
       position:absolute;
-      top:45%;
+      top:40%;
       left:50%;
       transform:translate(-50%,-50%);
       object-fit:cover;
@@ -27,7 +27,7 @@ const Image=styled.img`
  text-decoration:none;
  color: #232323;
  position:absolute;
- top:50%; 
+ top:45%; 
  left:50%;
  transform:translate(-50%,-50%);
 
@@ -37,7 +37,7 @@ function Questionary(){
   return(
       <div>
         <MainWraper>
-        <Image src={picture}></Image>
+           <Image src={picture}></Image>
            <Title to={'/private'}>კითხვარის დაწყება</Title>
          </MainWraper>
       </div>
