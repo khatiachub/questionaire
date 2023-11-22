@@ -314,7 +314,7 @@ body{
   transform:translateX(-50%);
   width:150px;
   z-index:100 ;
-  top:90vh;
+  top:95vh;
 `,kf=Z.button`
   background-color: #e5e7e9;
   border: none;
@@ -466,6 +466,9 @@ attempted value: ${o}
     color:#fff; 
     line-height:76px;
     letter-spacing:24px;
+    @media (max-width: 768px) {
+    font-size:30px;
+  }
     `,ox=Z.img`
     position:absolute;
     left:35%;
