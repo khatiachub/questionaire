@@ -16,6 +16,9 @@ const Text=styled.p`
     color:#fff; 
     line-height:76px;
     letter-spacing:24px;
+    @media (max-width: 768px) {
+    font-size:30px;
+  }
     `
 const Image1=styled.img`
     position:absolute;

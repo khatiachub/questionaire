@@ -76,7 +76,7 @@ const ArrowWraper=styled.div`
   transform:translateX(-50%);
   width:150px;
   z-index:100 ;
-  top:90vh;
+  top:95vh;
 `
 const Button = styled.button`
   background-color: #e5e7e9;
