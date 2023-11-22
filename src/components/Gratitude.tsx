@@ -15,7 +15,9 @@ const Text=styled.p`
     font-weight:700;
     color:#fff; 
     line-height:76px;
+    text-align:center;
     letter-spacing:24px;
+    margin-left:10px;
     @media (max-width: 768px) {
     font-size:30px;
   }

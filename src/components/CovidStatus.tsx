@@ -65,17 +65,17 @@ const ImgArrowleft=styled.img`
 const Wraper=styled.div`
   width:100%;
   position: relative;
-  height:100vh;
+  height:120vh;
   margin-top:0px;
 `
 const ArrowWraper=styled.div`
   display:flex;
   justify-content:space-around;
-  position:fixed;
+  position:absolute;
   left:50%;
   transform:translateX(-50%);
   width:150px;
-  z-index:100 ;
+  z-index:100;
   top:95vh;
 `
 const Button = styled.button`
