@@ -304,16 +304,16 @@ body{
 `,Py=Z.div`
   width:100%;
   position: relative;
-  height:100vh;
+  height:120vh;
   margin-top:0px;
 `,Fy=Z.div`
   display:flex;
   justify-content:space-around;
-  position:fixed;
+  position:absolute;
   left:50%;
   transform:translateX(-50%);
   width:150px;
-  z-index:100 ;
+  z-index:100;
   top:95vh;
 `,kf=Z.button`
   background-color: #e5e7e9;
@@ -465,7 +465,9 @@ attempted value: ${o}
     font-weight:700;
     color:#fff; 
     line-height:76px;
+    text-align:center;
     letter-spacing:24px;
+    margin-left:10px;
     @media (max-width: 768px) {
     font-size:30px;
   }
