@@ -5,7 +5,7 @@ import picture from '../images/doctor2.png';
 import Content from './Content';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Form = styled.form`
   display: flex;
@@ -41,30 +41,32 @@ const Label = styled.label`
      width:534px;
 
 `;
-const ImgArrow = styled.img`
-  /* position: absolute; */
-  /* left: 53%; */
-  /* top: 120vh; */
-  /* bottom: 40px; */
-`
 const ImgArrowleft = styled.img`
-  /* position: absolute; */
-  /* left: 45%; */
-  /* top: 120vh; */
+  
 `;
+const ArrowWraper=styled.div`
+  display:flex;
+  margin-left:50%;
+  transform:translateX(-50%);
+  justify-content:space-around;
+  margin-bottom:50px;
+  margin-top:50px;
+`
 const Button = styled.button`
-  background-color: #e5e7e9;
+  background-color: #208298;
   border: none;
   position: absolute;
-  left: 50%;
-  top: 120vh;
+  width:180px;
+  height:56px;
+  border-radius:42px;
+  left: 40%;
+  top: 100vh;
+  color:#fff;
+   cursor: pointer;
 `;
 const ButtonLeft=styled.button`
    background-color: #e5e7e9;
    border: none;
-   position: absolute;
-   left: 45%;
-   top: 120vh;
 `
 const ErrorMessage = styled.p`
   color: #f15524;
@@ -95,7 +97,13 @@ export default function Vaccination() {
   } = useForm();
 
   const HandleClick = () => {
-    nav('/covidpolice');
+    nav('/gratitude',{
+      state:{
+        value:value,
+        state:state,
+        vaccine:vaccine
+      }
+    });
   };
   const nav = useNavigate();
   const onLeftArrowClick = () => {
@@ -122,6 +130,61 @@ export default function Vaccination() {
     setVaccine(target.value);
   };
 
+
+  useEffect(() => {
+    try {
+      const savedState = localStorage.getItem('myState');
+      if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        setValue(parsedState);
+      }
+    } catch (error) {
+      console.error('Error parsing saved state:', error);
+    }
+  }, []);
+
+   useEffect(() => {
+    localStorage.setItem('myState', JSON.stringify(value));
+  }, [value]);
+
+
+  useEffect(() => {
+    try {
+      const savedState = localStorage.getItem('vaccine');
+      if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        setVaccine(parsedState);
+      }
+    } catch (error) {
+      console.error('Error parsing saved state:', error);
+    }
+  }, []);
+
+
+
+   useEffect(() => {
+    localStorage.setItem('vaccine', JSON.stringify(vaccine));
+  }, [vaccine]);
+
+
+ 
+  useEffect(() => {
+    try {
+      const savedState = localStorage.getItem('state');
+      if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        setState(parsedState);
+      }
+    } catch (error) {
+      console.error('Error parsing saved state:', error);
+    }
+  }, []);
+  
+
+  
+   useEffect(() => {
+    localStorage.setItem('state', JSON.stringify(state));
+  }, [state]);
   return (
     <div>
       <Content
@@ -300,14 +363,14 @@ export default function Vaccination() {
               ''
             )}
 
-            <div style={{ display: 'flex' }}>
+            <ArrowWraper>
               <ButtonLeft>
                 <ImgArrowleft onClick={onLeftArrowClick} src={Leftarrow}></ImgArrowleft>
               </ButtonLeft>
-              <Button type='submit'>
-                <ImgArrow style={{opacity:state&&value||(state&&vaccine)?'100%':'50%'}}   src={arrow}></ImgArrow>
+              <Button type='submit'style={{opacity:state&&value||(state&&vaccine)?'100%':'50%'}} >
+                დასრულება
               </Button>
-            </div>
+            </ArrowWraper>
           </Form>
         }
       />

@@ -2,7 +2,7 @@ import Content from './Content';
 import picture from '../images/vaccinate2.png';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Leftarrow from '../images/Vector 7.png';
 import arrow from '../images/Vector 2.png';
 
@@ -57,17 +57,34 @@ const Radio = styled.label`
   font-weight: 400;
 `;
 const ImgArrow = styled.img`
-   position:absolute;
+   /* position:absolute;
    left: 53%;
-   top:120vh;
-   bottom:40px;
+   bottom:50px; */
 `;
 const ImgArrowleft=styled.img`
-  position: absolute;
+  /* position: absolute;
   left: 45%;
-  top:120vh;
+  bottom:50px; */
 `
-
+const Wraper=styled.div`
+  width:100%;
+  position: relative;
+  height:100vh;
+  margin-top:0px;
+`
+const ArrowWraper=styled.div`
+  display:flex;
+  justify-content:space-around;
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  width:150px;
+  z-index:100 ;
+  top:90vh;
+  @media screen and (max-width:768px) {
+    top:80vh;
+  }
+`
 const Button = styled.button`
   background-color: #e5e7e9;
   border: none;
@@ -112,7 +129,15 @@ export default function CovidStatus() {
       (numbers.number && numbers.quantity) ||
       numbers.date
     ) {
-      nav('/vaccination');
+      nav('/privateroute',{
+        state:{
+            select:select,
+            selectedOption:selectedOption,
+            number:numbers?.number,
+            quantity:numbers?.quantity,
+            date:numbers?.date
+        }
+    })
     } else if (!selectedOption) {
       setError('გთხოვთ მონიშნოთ პასუხი');
     } else if (!select) {
@@ -121,6 +146,7 @@ export default function CovidStatus() {
       setErrorNumber('ამ ველის შევსება სავალდებულოა');
     }
   };
+ 
   const [errorNumber, setErrorNumber] = useState('');
   const [numbers, setNumbers] = useState({
     number: '',
@@ -133,8 +159,60 @@ export default function CovidStatus() {
     const value = target.value;
     setNumbers({ ...numbers, [name]: value });
   };
+
+
+  useEffect(() => {
+    try {
+      const savedState = localStorage.getItem('value');
+      if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        setSelectedOption(parsedState);
+      }
+    } catch (error) {
+      console.error('Error parsing saved state:', error);
+    }
+  }, []);
+
+   useEffect(() => {
+    localStorage.setItem('value', JSON.stringify(selectedOption));
+  }, [selectedOption]);
+
+
+
+
+  useEffect(() => {
+    try {
+      const savedState = localStorage.getItem('state');
+      if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        setSelect(parsedState);
+      }
+    } catch (error) {
+      console.error('Error parsing saved state:', error);
+    }
+  }, []);
+   useEffect(() => {
+    localStorage.setItem('state', JSON.stringify(select));
+  }, [select]);
+
+
+  useEffect(() => {
+    try {
+      const savedState = localStorage.getItem('myState');
+      if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        setNumbers(parsedState);
+      }
+    } catch (error) {
+      console.error('Error parsing saved state:', error);
+    }
+  }, []);
+   useEffect(() => {
+    localStorage.setItem('myState', JSON.stringify(numbers));
+  },[numbers]);
+
   return (
-    <>
+    <Wraper>
       <Content
         click={onLeftArrowClick}
         picture={picture}
@@ -263,7 +341,7 @@ export default function CovidStatus() {
             ) : (
               ''
             )}
-            <div style={{display:'flex'}}>
+            <ArrowWraper >
             <Button onClick={onLeftArrowClick}>
               <ImgArrowleft src={Leftarrow}>
             </ImgArrowleft>
@@ -272,21 +350,21 @@ export default function CovidStatus() {
               <ImgArrow
                 style={{
                   opacity:
-                    (selectedOption &&
+                    ((selectedOption &&
                       select &&
                       numbers.number &&
                       numbers.quantity) ||
-                    numbers.date
+                    numbers.date)||selectedOption==='no'||selectedOption==='now'
                       ? '100%'
                       : '50%',
                 }}
                 src={arrow}
               ></ImgArrow>
             </Button>
-            </div>
+            </ArrowWraper>
           </Form>
         }
       />
-    </>
+    </Wraper>
   );
 }

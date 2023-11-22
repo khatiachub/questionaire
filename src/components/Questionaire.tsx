@@ -10,7 +10,7 @@ const MainWraper=styled.div`
 `
 const Image=styled.img`
       position:absolute;
-      top:50%;
+      top:45%;
       left:50%;
       transform:translate(-50%,-50%);
       object-fit:cover;
@@ -26,19 +26,11 @@ const Image=styled.img`
  margin-top:101px;
  text-decoration:none;
  color: #232323;
- `
- const ImageBox=styled.div`
  position:absolute;
  top:50%; 
  left:50%;
- transform:translate(-50%);
+ transform:translate(-50%,-50%);
 
- width:200px;
- height:300px;
- display:flex;
- flex-direction:column;
- justify-content:center;
- align-items:center;
  `
 
 function Questionary(){
@@ -46,10 +38,7 @@ function Questionary(){
       <div>
         <MainWraper>
         <Image src={picture}></Image>
-
-          <ImageBox>
            <Title to={'/private'}>კითხვარის დაწყება</Title>
-           </ImageBox>
          </MainWraper>
       </div>
   )

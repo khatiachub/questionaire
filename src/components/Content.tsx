@@ -23,7 +23,7 @@ object-fit:cover;
     height:500px;
 }
 @media (max-width:1024px){
-    max-width:400px;
+    max-width:370px;
     width:100%;
     height:500px;
 }
@@ -40,10 +40,11 @@ body{
     background-color:#e5e7e9;
 }
 `
-export default function Content(props:any){   
+export default function Content(props:any){  
+     
     return(
         <>
-         <Header page={location.pathname==='/private'?'1/4':location.pathname==='/covidstatus'?'2/4':location.pathname==='/vaccination'?'3/4':location.pathname==='/covidpolice'?'4/4':null}/>
+         <Header page={location.hash==='#/private'?'1/4':location.hash==='#/covidstatus'?'2/4':location.hash==='#/vaccination'?'3/4':location.hash==='#/covidpolice'?'4/4':null}/>
           <Wraper>
           <GlobalStyle/>
              {props.inputs}

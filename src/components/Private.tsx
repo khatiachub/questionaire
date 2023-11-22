@@ -4,9 +4,11 @@ import Content from './Content';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import arrow from '../images/Vector 2.png';
-import { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
+
 
 const Form = styled.form`
   display: flex;
@@ -55,9 +57,12 @@ const Button = styled.button`
   background-color: #e5e7e9;
   position: absolute;
   left: 50%;
-  top: 110vh;
+  top:90vh;
   transform: translateX(-50%);
   border: none;
+  @media screen and (max-width:768px) {
+    top:77vh;
+  }
 `;
 const ErrorMessage = styled.p`
   color: #f15524;
@@ -88,33 +93,59 @@ export default function Private() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
   type FormData = yup.InferType<typeof schema>;
 
-  const nav = useNavigate();
-  function HandleClick() {
-    nav('/covidstatus');
-    reset();
-  }
-
-  const [value, setValues] = useState({
-    name: '',
-    lastname: '',
-    email: '',
+  const [value, setValue] = useState<{
+    name: string;
+    lastname: string;
+    email: string;
+  }>({
+      name: '',
+      lastname: '',
+      email: '',
   });
+
   const handleChange = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
     const name = target.name;
-    setValues({ ...value, [name]: target.value });
+    setValue({ ...value, [name]: target.value });
   };
+
+  useEffect(() => {
+    try {
+      const savedState = localStorage.getItem('myStates');
+      if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        setValue(parsedState);
+      }
+    } catch (error) {
+      console.error('Error parsing saved state:', error);
+    }
+  }, []);
+
+   useEffect(() => {
+    localStorage.setItem('myStates', JSON.stringify(value));
+  }, [value]);
+  
+  const nav = useNavigate();
+  function HandleClick() {
+      nav('/privateroute',{state:{
+        name:value.name,
+        lastname:value.lastname,
+        email:value.email
+      }});
+  }
 
   const lastname = register('lastname');
   const email = register('email');
   const name = register('name');
+
   return (
     <>
+    
+   
       <Content
         picture={picture}
         inputs={
@@ -164,11 +195,10 @@ export default function Private() {
             {errors.email && (
               <ErrorMessage>{errors.email?.message}</ErrorMessage>
             )}
-
             <Line></Line>
             <Paragraph>*-ით მონიშნული ველების შევსება სავალდებულოა</Paragraph>
             <Button type='submit'>
-              <ImgArrow src={arrow}></ImgArrow>
+              <ImgArrow style={{opacity:value.name&&value.lastname&&value.email?'100%':'50%'}} src={arrow}></ImgArrow>
             </Button>
           </Form>
         }
